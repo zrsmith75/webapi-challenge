@@ -12,10 +12,10 @@ I need this code, just don't know where, perhaps should make some middleware, do
 
 Go code!
 */
-// require("dotenv").config();
+require("dotenv").config();
 
 const server = require("./api/server.js");
-const port = 5000;
+const port = process.env.PORT;
 
 server.listen(port, () => {
   console.log(`Server is listening to http://localhost:${port}`);

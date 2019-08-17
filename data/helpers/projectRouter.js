@@ -14,7 +14,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
   Projects.get()
     .then(getProject => {
-      // console.log(project, "Done");
+      const messageOfTheDay = process.env.MOTD || "Hello Lambda World";
       res.status(200).json(getProject);
     })
     // .then(project => {
