@@ -28,7 +28,22 @@ router.get("/", (req, res) => {
     });
 });
 
-// POST using req.body
+// GET /:id/actions
+router.get("/:id/actions", (req, res) => {
+  const { id } = req.params;
+  Projects.getProjectActions(id)
+    .then(projectActions => {
+      res.status(200).json(projectActions);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({
+        message: "Unable to location your project actions"
+      });
+    });
+});
+
+// POST
 router.post("/", (req, res) => {
   Projects.insert(req.body)
     .then(postProject => {
