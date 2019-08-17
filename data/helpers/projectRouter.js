@@ -28,14 +28,7 @@ router.get("/", (req, res) => {
     });
 });
 
-// GET /:id
-
-// router.get('/:id', (req, res) => {
-//   const { id } = req.params;
-
-// })
-
-// POST
+// POST using req.body
 router.post("/", (req, res) => {
   Projects.insert(req.body)
     .then(project => {
