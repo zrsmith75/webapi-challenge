@@ -13,9 +13,15 @@ const router = express.Router();
 // GET
 router.get("/", (req, res) => {
   Projects.get()
-    .then(getProject => {
+    .then(getProjects => {
       const messageOfTheDay = process.env.MOTD || "Hello Lambda World";
-      res.status(200).json(getProject);
+      if (getProjects) {
+        res.status(200).json(getProjects);
+      } else {
+        res.status(404).json({
+          message: "Unable to locate the projects"
+        });
+      }
     })
     // .then(project => {
     //   res.status(200).json({ message: "bingo" });
@@ -33,12 +39,18 @@ router.get("/:id/actions", (req, res) => {
   const { id } = req.params;
   Projects.getProjectActions(id)
     .then(projectActions => {
-      res.status(200).json(projectActions);
+      if (projectActions) {
+        res.status(200).json(projectActions);
+      } else {
+        res.status(404).json({
+          message: "Unable to locate your project action"
+        });
+      }
     })
     .catch(error => {
       console.log(error);
       res.status(500).json({
-        message: "Unable to location your project actions"
+        message: "Unable to locate your project actions"
       });
     });
 });
@@ -61,7 +73,13 @@ router.post("/", (req, res) => {
 router.put("/:id", (req, res) => {
   Projects.update(req.params.id, req.body)
     .then(updatedProject => {
-      res.status(200).json(updatedProject);
+      if (updatedProject) {
+        res.status(200).json(updatedProject);
+      } else {
+        res.status(404).json({
+          message: "Unable to locate the project"
+        });
+      }
     })
     .catch(error => {
       console.log(error);
@@ -76,10 +94,16 @@ router.put("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
   Projects.remove(id)
-    .then(deleteUer => {
-      res.status(200).json({
-        message: "Proejct destroyed"
-      });
+    .then(deleteUser => {
+      if (deleteUser > 0) {
+        res.status(200).json({
+          message: "Project destroyed"
+        });
+      } else {
+        res.status(404).json({
+          message: "Unable to locate the project"
+        });
+      }
     })
     .catch(error => {
       console.log(error);
