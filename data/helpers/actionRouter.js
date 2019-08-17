@@ -1,10 +1,10 @@
 const express = require("express");
-const Action = require("./actionModel.js");
+const Actions = require("./actionModel.js");
 const router = express.Router();
 
 router.get("/", (req, res) => {
   res.status(200).json({
-    message: "inside action at /api/actions"
+    message: "inside Actions at /api/actions"
   });
 });
 
