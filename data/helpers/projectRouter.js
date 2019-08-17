@@ -43,6 +43,18 @@ router.post("/", (req, res) => {
 });
 
 // PUT /:id
+router.put("/:id", (req, res) => {
+  Projects.update(req.params.id, req.body)
+    .then(project => {
+      res.status(200).json(project);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({
+        message: "Unable to update your project"
+      });
+    });
+});
 
 // DELETE /:id
 
