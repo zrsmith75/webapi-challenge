@@ -26,13 +26,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+Using express to create a server, and then builtin express middleware like json() and router.
+
 - [ ] Describe Middleware?
+
+Functions that work in the middle of the node and express sandwich, that allow for additional features or usage cases.
 
 - [ ] Describe a Resource?
 
+A resource is what a API endpoint interacts with, as example /api/posts interacts with the posts resource.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+A status message that status request was successful, and likewise you can provide messages to provide other intereactions and request denied.
+
 - [ ] How can we partition our application into sub-applications?
+
+Using express middleware 'router' to have seperate endpoints that work with different resources, or sub applications.
 
 ## Project Setup
 
