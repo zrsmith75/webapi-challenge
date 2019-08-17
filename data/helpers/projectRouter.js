@@ -13,9 +13,9 @@ const router = express.Router();
 // GET
 router.get("/", (req, res) => {
   Projects.get()
-    .then(project => {
+    .then(getProject => {
       // console.log(project, "Done");
-      res.status(200).json(project);
+      res.status(200).json(getProject);
     })
     // .then(project => {
     //   res.status(200).json({ message: "bingo" });
@@ -31,8 +31,8 @@ router.get("/", (req, res) => {
 // POST using req.body
 router.post("/", (req, res) => {
   Projects.insert(req.body)
-    .then(project => {
-      res.status(201).json(project);
+    .then(postProject => {
+      res.status(201).json(postProject);
     })
     .catch(error => {
       console.log(error);
@@ -45,8 +45,8 @@ router.post("/", (req, res) => {
 // PUT /:id
 router.put("/:id", (req, res) => {
   Projects.update(req.params.id, req.body)
-    .then(project => {
-      res.status(200).json(project);
+    .then(updatedProject => {
+      res.status(200).json(updatedProject);
     })
     .catch(error => {
       console.log(error);
@@ -57,5 +57,21 @@ router.put("/:id", (req, res) => {
 });
 
 // DELETE /:id
+
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  Projects.remove(id)
+    .then(deleteUer => {
+      res.status(200).json({
+        message: "Proejct destroyed"
+      });
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({
+        message: "Unable to destroy  your project"
+      });
+    });
+});
 
 module.exports = router;
